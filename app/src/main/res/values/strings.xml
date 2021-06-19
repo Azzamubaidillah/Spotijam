@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Spotijam</string>
+    <string name="notification_channel_name">Music Channel</string>
+    <string name="notification_channel_description">Shows the currently playing music</string>
+
+
 </resources>

@@ -1,8 +1,9 @@
-package com.plcoding.azzam
+package com.plcoding.azzam.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.RequestManager
+import com.plcoding.azzam.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

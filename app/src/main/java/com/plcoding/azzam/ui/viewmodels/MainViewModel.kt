@@ -4,6 +4,7 @@ import android.support.v4.media.MediaBrowserCompat
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.plcoding.azzam.data.entities.Song
 import com.plcoding.azzam.exoplayer.MusicServiceConnector
 import com.plcoding.azzam.other.Constants.MEDIA_ROOT_ID
@@ -11,7 +12,7 @@ import com.plcoding.azzam.other.Resource
 
 class MainViewModel @ViewModelInject constructor(
     private val musicServiceConnection: MusicServiceConnector
-) {
+) : ViewModel() {
     private val _mediaItems = MutableLiveData<Resource<List<Song>>>()
     val mediaItems: LiveData<Resource<List<Song>>> = _mediaItems
 
@@ -43,4 +44,20 @@ class MainViewModel @ViewModelInject constructor(
         })
     }
 
+    fun skipToNextString() {
+        musicServiceConnection.transportControls.skipToNext()
+    }
+
+    fun skipToPreviousSong() {
+        musicServiceConnection.transportControls.skipToPrevious()
+    }
+
+    fun seekTo(pos: Long) {
+        musicServiceConnection.transportControls.seekTo(pos)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        musicServiceConnection.unsubsribe(MEDIA_ROOT_ID, object : MediaBrowserCompat.SubscriptionCallback() {})
+    }
 }
